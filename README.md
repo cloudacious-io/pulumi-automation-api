@@ -1,10 +1,26 @@
 # Pulumi Automation API
 
-## Sources
-[Getting started guide](https://www.pulumi.com/docs/using-pulumi/automation-api/getting-started-automation-api/)
 
-[Automation API examples](https://github.com/pulumi/automation-api-examples/tree/main)
 
-[Pulumi Automation API - API Reference](https://www.pulumi.com/docs/reference/pkg/python/pulumi/#module-pulumi.automation)
 
-[Slack archive](https://archive.pulumi.com/c/automation-api)
+## Deployment
+Instructions coming soon.
+
+
+## Support
+Come hang out with us in our [Discord](https://discord.gg/d7YccKnenh)! Or if that link isn't working (Discord links are prone to breaking), look for the latest at [cloudacious.io](https://cloudacious.io).
+
+## Roadmap
+...
+
+## Contributing
+Help is welcome! Please submit an issue with your suggestion to get started.
+
+## Authors and acknowledgment
+Authored by [@surfingdoggo](https://gitlab.com/SurfingDoggo).
+
+## License
+TBD
+
+## Project status
+Actively maintained as of April 2024, and open to contributions!
