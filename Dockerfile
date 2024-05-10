@@ -16,6 +16,8 @@ RUN python -m pip install \
   pulumi-std \
   pulumi-docker 
 
-
 RUN curl -fsSL https://get.pulumi.com | sh
 ENV PULUMI_CONFIG_PASSPHRASE=""
+
+COPY scripts/.bashrc .
+RUN cat .bashrc >> /root/.bashrc
