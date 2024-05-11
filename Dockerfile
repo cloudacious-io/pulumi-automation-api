@@ -19,5 +19,5 @@ RUN python -m pip install \
 RUN curl -fsSL https://get.pulumi.com | sh
 ENV PULUMI_CONFIG_PASSPHRASE=""
 
-COPY scripts/.bashrc .
+COPY .bashrc .
 RUN cat .bashrc >> /root/.bashrc
