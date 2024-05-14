@@ -8,19 +8,19 @@ from cloudaciousIAC import WebhookHandler
 load_dotenv()
 
 
-def main(event) -> None:  
+def main(event) -> None:
     f"""
     {__name__} creates webhook infrastructure with Pulumi using Pulumi Automation API.
     """
-    
+
     stack_action = event["stack_action"]
     stack_info = event["stack_info"]
     stack_name = stack_info["stack_name"]
     pulumi_backend_url = stack_info["pulumi_backend_url"]
 
     project_settings = auto.ProjectSettings(
-        name=f"{stack_name}", 
-        runtime="python", 
+        name=f"{stack_name}",
+        runtime="python",
         backend={"url": pulumi_backend_url},
     )
 
