@@ -1,0 +1,51 @@
+FROM public.ecr.aws/lambda/python:3.12 as lambda-base
+
+RUN python --version
+
+RUN python -m pip install --upgrade setuptools pip
+
+RUN python -m pip install \
+  python-dotenv \
+  boto3 \
+  requests \
+  pillow \
+  PyNaCl \ 
+  pandas
+
+RUN dnf install git -y
+
+### GitLab
+ARG CLOUDACIOUS_REPO_URL
+ARG CLOUDACIOUS_REPO_BRANCH
+ARG GITLAB_TOKEN_USER
+ARG GITLAB_TOKEN
+RUN echo "hi mom hey yo supppity up"
+# ### cloudacious marketing repo
+RUN python -m pip install \
+  git+https://${GITLAB_TOKEN_USER}:${GITLAB_TOKEN}@${CLOUDACIOUS_REPO_URL}${CLOUDACIOUS_REPO_BRANCH}
+
+COPY scripts/.bashrc .
+RUN cat .bashrc >> /root/.bashrc
+
+
+FROM lambda-base AS target
+RUN echo "hi mom hi hihissssso"
+ARG FN_CODE_REPO_URL
+ARG FN_CODE_REPO_BRANCH
+RUN echo ${FN_CODE_REPO_BRANCH}
+WORKDIR /code
+RUN git clone ${FN_CODE_REPO_BRANCH} https://${GITLAB_TOKEN_USER}:${GITLAB_TOKEN}@${FN_CODE_REPO_URL} .
+RUN cp -rv . ${LAMBDA_TASK_ROOT}
+WORKDIR ${LAMBDA_TASK_ROOT}
+ARG PY_FILE
+RUN mv ${PY_FILE} main.py
+CMD [ "main.main" ] 
+
+FROM lambda-base as lambda-pulumi
+RUN python -m pip install \
+  pulumi-aws \
+  pulumi-aws-native \
+  pulumi-std
+RUN curl -fsSL https://get.pulumi.com | sh
+ENV PULUMI_CONFIG_PASSPHRASE=""
+COPY iac ${LAMBDA_TASK_ROOT}

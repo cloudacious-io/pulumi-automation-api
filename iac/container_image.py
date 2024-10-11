@@ -109,6 +109,7 @@ def main(event, context):
 
 
 if __name__ == "__main__":
-    event = {}
+    with open("stack_info.json", "r") as f:
+        event = json.load(f)
     # run Pulumi
     main(event=event, context="")

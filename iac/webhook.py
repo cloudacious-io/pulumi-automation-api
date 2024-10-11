@@ -1,3 +1,4 @@
+import json
 import os
 
 from dotenv import load_dotenv
@@ -48,5 +49,6 @@ def main(event) -> None:
 
 
 if __name__ == "__main__":
-    event = {}
+    with open("stack_info.json", "r") as f:
+        event = json.load(f)
     main(event=event)
